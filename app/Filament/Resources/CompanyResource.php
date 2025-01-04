@@ -17,7 +17,12 @@ class CompanyResource extends Resource
 {
     protected static ?string $model = Company::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
+    protected static ?string $modelLabel='Company';
+    protected static ?string $pluralModelLabel='Company';
+
+    protected static ?string $navigationGroup='Settings';
+    protected static ?int $navigationSort=1;
 
     public static function form(Form $form): Form
     {
@@ -32,7 +37,6 @@ class CompanyResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('tel')
                     ->tel()
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('logo')
                     ->default(null),
@@ -53,20 +57,13 @@ class CompanyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tel')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('logo')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('youtube')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('facebook')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('phone'),
+                Tables\Columns\TextColumn::make('tel'),
+                Tables\Columns\ImageColumn::make('logo'),
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('youtube'),
+                Tables\Columns\TextColumn::make('facebook'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -80,7 +77,7 @@ class CompanyResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
